@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frontier Watch — Technology Intelligence for Strategy Professionals</title>
+<meta name="description" content="Professional-grade foresight on frontier technologies — evidence-backed, forward-looking, self-serve. Built for strategy leaders at technology companies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F4F5F7;
+    --surface: #FFFFFF;
+    --surface-offset: #EEF0F3;
+    --divider: #E2E5EA;
+    --border: #D3D7DE;
+    --text: #0F1117;
+    --text-muted: #6B7280;
+    --text-faint: #9CA3AF;
+    --accent: #1A56DB;
+    --accent-hover: #1447C4;
+    --accent-highlight: #DBEAFE;
+    --status-active: #047857;
+    --radius: 12px;
+  }
+  [data-theme="dark"] {
+    --bg: #0C0E12;
+    --surface: #131620;
+    --surface-offset: #1E2230;
+    --divider: #252A38;
+    --border: #2E3448;
+    --text: #E8EBF0;
+    --text-muted: #8892A4;
+    --text-faint: #4A5268;
+    --accent: #4D7EF7;
+    --accent-hover: #3D6EE7;
+    --accent-highlight: #1E2F5A;
+    --status-active: #10B981;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    transition: background 200ms, color 200ms;
+  }
+  a { color: var(--accent); text-decoration: none; }
+
+  /* Header */
+  .header {
+    position: sticky; top: 0; z-index: 100;
+    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px;
+    background: color-mix(in srgb, var(--surface) 90%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--divider);
+  }
+  .wordmark { font-size: 17px; color: var(--text); display: flex; align-items: baseline; gap: 5px; }
+  .wordmark .fw-1 { font-weight: 600; }
+  .wordmark .fw-2 { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 19px; }
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  .theme-toggle {
+    background: none; border: none; cursor: pointer; padding: 4px;
+    color: var(--text-muted); display: flex; align-items: center;
+  }
+  .btn-ghost {
+    font-size: 14px; font-weight: 500; padding: 6px 16px;
+    color: var(--accent); border: 1px solid var(--accent); border-radius: 6px;
+    transition: all 160ms;
+  }
+  .btn-ghost:hover { background: var(--accent); color: #fff; }
+
+  /* Layout */
+  .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  /* Hero */
+  .hero { padding: 88px 0 64px; }
+  .micro-label {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent);
+    display: block; margin-bottom: 20px;
+  }
+  h1 {
+    font-size: clamp(34px, 5.5vw, 48px);
+    font-weight: 650; letter-spacing: -0.03em; line-height: 1.12;
+    margin-bottom: 24px;
+  }
+  h1 em { font-family: 'Instrument Serif', serif; font-style: normal; font-weight: 400; letter-spacing: 0.005em; }
+  .hero-sub {
+    font-size: 18px; color: var(--text-muted); max-width: 620px; margin-bottom: 12px;
+  }
+  .hero-sub strong { color: var(--text); font-weight: 600; }
+
+  /* Definition strip */
+  .definition {
+    border-top: 1px solid var(--divider);
+    border-bottom: 1px solid var(--divider);
+    background: var(--surface-offset);
+  }
+  .definition .container { padding-top: 40px; padding-bottom: 40px; }
+  .definition-intro { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; max-width: 640px; }
+  .attrs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .attr h3 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .attr p { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+  .attr .num { font-size: 12px; color: var(--accent); font-weight: 600; letter-spacing: 0.06em; display: block; margin-bottom: 8px; }
+  @media (max-width: 720px) { .attrs { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 440px) { .attrs { grid-template-columns: 1fr; } }
+
+  /* Signal section */
+  .signal-section { padding: 64px 0; }
+  .section-label {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-faint); margin-bottom: 16px; display: block;
+  }
+  .signal-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    box-shadow: 0 1px 3px rgba(15,17,23,0.06);
+  }
+  .signal-top { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+  .badge-domain {
+    font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
+    padding: 4px 10px; border-radius: 999px;
+    background: #EEF2FF; color: #3730A3;
+  }
+  [data-theme="dark"] .badge-domain { background: #1E2145; color: #A5B4FC; }
+  .badge-status { font-size: 12px; color: var(--text-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .badge-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--status-active); }
+  .confidence { margin-left: auto; display: flex; gap: 4px; align-items: center; }
+  .confidence span { width: 8px; height: 8px; border-radius: 50%; background: var(--surface-offset); border: 1px solid var(--border); }
+  .confidence span.on { background: var(--accent); border-color: var(--accent); }
+  .confidence .conf-label { width: auto; height: auto; border: none; background: none; font-size: 11px; color: var(--text-faint); margin-left: 4px; }
+  .signal-title { font-size: 21px; font-weight: 550; letter-spacing: -0.01em; line-height: 1.3; margin-bottom: 12px; }
+  .signal-thesis { font-size: 15px; color: var(--text-muted); margin-bottom: 18px; }
+  .implication {
+    background: var(--accent-highlight);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    font-size: 15px;
+    margin-bottom: 18px;
+  }
+  .implication .micro { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 6px; }
+  .signal-footer { display: flex; align-items: center; gap: 16px; font-size: 12px; color: var(--text-faint); flex-wrap: wrap; }
+  .signal-footer .read-link { font-size: 13px; font-weight: 500; color: var(--accent); margin-left: auto; }
+  .signal-footer .read-link:hover { text-decoration: underline; }
+
+  /* CTA */
+  .cta { border-top: 1px solid var(--divider); background: var(--surface); }
+  .cta .container { padding-top: 72px; padding-bottom: 80px; text-align: left; }
+  .cta h2 { font-size: 28px; font-weight: 650; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .cta h2 em { font-family: 'Instrument Serif', serif; font-style: normal; font-weight: 400; letter-spacing: 0.005em; }
+  .cta-sub { font-size: 16px; color: var(--text-muted); max-width: 600px; margin-bottom: 28px; }
+  .founding {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: var(--surface-offset);
+    border: 1px solid var(--divider);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    max-width: 600px;
+    margin-bottom: 32px;
+    font-size: 14px; color: var(--text-muted);
+  }
+  .founding strong { color: var(--text); }
+  .founding .marker {
+    flex-shrink: 0; margin-top: 2px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: var(--accent-highlight); color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+  }
+  .cta-buttons { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #fff;
+    font-size: 15px; font-weight: 550;
+    padding: 13px 28px; border-radius: 8px;
+    transition: background 160ms;
+  }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-secondary {
+    font-size: 14px; font-weight: 500; color: var(--text-muted);
+    padding: 12px 8px;
+  }
+  .btn-secondary:hover { color: var(--accent); }
+  .cta-note { font-size: 12px; color: var(--text-faint); margin-top: 20px; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--divider); background: var(--surface-offset); }
+  footer .container {
+    padding-top: 28px; padding-bottom: 28px;
+    display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+  }
+  .footer-left .wordmark { font-size: 15px; margin-bottom: 6px; }
+  .footer-left p { font-size: 12px; color: var(--text-faint); max-width: 480px; }
+  .footer-links { display: flex; gap: 20px; font-size: 14px; }
+  .footer-links a { color: var(--text-muted); }
+  .footer-links a:hover { color: var(--accent); }
+
+  @media (max-width: 720px) {
+    .header { padding: 0 20px; }
+    .hero { padding: 56px 0 48px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="wordmark"><span class="fw-1">Frontier</span><span class="fw-2">Watch</span></div>
+  <div class="header-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+    <a class="btn-ghost" href="https://frontierwatch.substack.com" target="_blank" rel="noopener">Subscribe</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <span class="micro-label">Technology Intelligence · AI · Semiconductors · Quantum</span>
+    <h1>Frontier tech moves faster than your <em>intelligence stack.</em></h1>
+    <p class="hero-sub">The intelligence available to strategy leaders is either expensive and backward-looking, too generic to act on, or too raw to trust. <strong>Frontier Watch is the gap between those worlds</strong> — professional-grade foresight on frontier technologies: evidence-backed, forward-looking, and self-serve.</p>
+    <p class="hero-sub">We don't summarize the news. We publish opinionated analysis with a public track record — and update it when the evidence changes.</p>
+  </div>
+</section>
+
+<section class="definition">
+  <div class="container">
+    <p class="definition-intro">Every signal we publish carries four things. No vague trends, no roundups.</p>
+    <div class="attrs">
+      <div class="attr"><span class="num">01</span><h3>Specificity</h3><p>A concrete technology, company, or market shift — not a theme.</p></div>
+      <div class="attr"><span class="num">02</span><h3>Evidence</h3><p>Two or more independent sources; primary research and filings first.</p></div>
+      <div class="attr"><span class="num">03</span><h3>Forward trajectory</h3><p>Where this goes over 6–24 months, not what happened last week.</p></div>
+      <div class="attr"><span class="num">04</span><h3>Strategic implication</h3><p>A direct answer to <em>so what?</em> for a strategy leader.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="signal-section">
+  <div class="container">
+    <span class="section-label">From the archive · Published May 2026</span>
+    <article class="signal-card">
+      <div class="signal-top">
+        <span class="badge-domain">AI INFRASTRUCTURE</span>
+        <span class="badge-status">Active</span>
+        <div class="confidence" title="Confidence 4/5 — strong evidence, minor gaps in supporting data">
+          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span>
+          <span class="conf-label">4/5 · 12–24 mo</span>
+        </div>
+      </div>
+      <h2 class="signal-title">AI lock-in has moved from the model layer to the orchestration stack — and strategy teams aren't in the room.</h2>
+      <p class="signal-thesis">GPT-4-class capability is now commodity for most enterprise workloads. Strategic value has migrated to three layers simultaneously — cloud infrastructure, data platforms, and workflow orchestration — where four vendor camps are forming and switching costs compound across layers.</p>
+      <div class="implication">
+        <span class="micro">Strategic implication</span>
+        Enterprises making these three decisions independently, business unit by business unit, are accumulating lock-in from multiple vendors at once — with no unified governance model and compounding migration cost. The architecture decisions that determine the next decade of AI flexibility are being made now, before strategy teams enter the conversation.
+      </div>
+      <div class="signal-footer">
+        <span>Sources: 30+ cited</span>
+        <span>Domain: AI Infrastructure</span>
+        <a class="read-link" href="https://frontierwatch.substack.com/p/enterprise-ai-strategy-vendor-lock" target="_blank" rel="noopener">Read the full analysis ↗</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <h2>The archive is the proof. <em>Early is when it compounds.</em></h2>
+    <p class="cta-sub">Every signal joins a public track record — confirmed, revised, or invalidated, recorded transparently. You can't catch up on six months of forward-looking analysis in a day.</p>
+    <div class="founding">
+      <span class="marker">100</span>
+      <div><strong>Founding subscriber offer.</strong> The first 100 subscribers receive two years of free access to the paid intelligence tier at launch. No codes, no forms — early readers shape what Frontier Watch becomes.</div>
+    </div>
+    <div class="cta-buttons">
+      <a class="btn-primary" href="https://frontierwatch.substack.com" target="_blank" rel="noopener">Subscribe on Substack →</a>
+      <a class="btn-secondary" href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7248378826097901568" target="_blank" rel="noopener">Follow the LinkedIn newsletter ↗</a>
+    </div>
+    <p class="cta-note">1–2 long-form analyses per week. No spam, no roundups.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-left">
+      <div class="wordmark"><span class="fw-1">Frontier</span><span class="fw-2">Watch</span></div>
+      <p>&copy; 2026 Frontier Watch LLC. Technology intelligence for strategy professionals. Nothing published here constitutes investment, financial, legal, or professional advice.</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://frontierwatch.substack.com" target="_blank" rel="noopener">Newsletter</a>
+      <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7248378826097901568" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const root = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  const icon = document.getElementById('themeIcon');
+  const sun = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4"/>';
+  const moon = '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches) { root.dataset.theme = 'dark'; icon.innerHTML = sun; }
+  btn.addEventListener('click', () => {
+    const dark = root.dataset.theme === 'dark';
+    root.dataset.theme = dark ? 'light' : 'dark';
+    icon.innerHTML = dark ? moon : sun;
+  });
+</script>
+</body>
+</html>
