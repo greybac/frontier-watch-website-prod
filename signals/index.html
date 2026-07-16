@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signal Tracker — Frontier Watch</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <style>
+    /* ═══════════════════════════════════════════════════
+       CSS Custom Properties
+    ═══════════════════════════════════════════════════ */
+    :root {
+      --color-bg:             #F4F5F7;
+      --color-surface:        #FFFFFF;
+      --color-surface-2:      #F9FAFB;
+      --color-surface-offset: #EEF0F3;
+      --color-divider:        #E2E5EA;
+      --color-border:         #D3D7DE;
+
+      --color-text:           #0F1117;
+      --color-text-muted:     #6B7280;
+      --color-text-faint:     #9CA3AF;
+
+      --color-primary:        #1A56DB;
+      --color-primary-hover:  #1447C4;
+      --color-accent-highlight: #DBEAFE;
+
+      --status-active:        #047857;
+      --status-developing:    #B45309;
+      --status-resolved:      #1A56DB;
+      --status-invalidated:   #6B7280;
+
+      --text-xs:   12px;
+      --text-sm:   14px;
+      --text-base: 16px;
+      --text-lg:   20px;
+      --text-xl:   28px;
+
+      --radius-sm:   4px;
+      --radius-md:   8px;
+      --radius-lg:   12px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 1px 2px rgba(15,17,23,0.05), 0 1px 4px rgba(15,17,23,0.04);
+      --shadow-md: 0 4px 16px rgba(15,17,23,0.08), 0 2px 6px rgba(15,17,23,0.05);
+
+      /* Domain badge colors */
+      --domain-ai-bg:       #EEF2FF;
+      --domain-ai-text:     #3730A3;
+      --domain-semi-bg:     #FDF4E7;
+      --domain-semi-text:   #92400E;
+      --domain-quantum-bg:  #F0FDF4;
+      --domain-quantum-text:#166534;
+    }
+
+    [data-theme="dark"] {
+      --color-bg:             #0C0E12;
+      --color-surface:        #131620;
+      --color-surface-2:      #181C26;
+      --color-surface-offset: #1E2230;
+      --color-divider:        #252A38;
+      --color-border:         #2E3448;
+
+      --color-text:           #E8EBF0;
+      --color-text-muted:     #8892A4;
+      --color-text-faint:     #4A5268;
+
+      --color-primary:        #4D7EF7;
+      --color-primary-hover:  #3D6EE7;
+      --color-accent-highlight: #1E2F5A;
+
+      --status-active:        #10B981;
+      --status-developing:    #F59E0B;
+      --status-resolved:      #4D7EF7;
+      --status-invalidated:   #6B7280;
+
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.3), 0 1px 4px rgba(0,0,0,0.25);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.3);
+
+      --domain-ai-bg:        #1E1B4B;
+      --domain-ai-text:      #A5B4FC;
+      --domain-semi-bg:      #2D1F0E;
+      --domain-semi-text:    #FCD34D;
+      --domain-quantum-bg:   #052E16;
+      --domain-quantum-text: #6EE7B7;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       Base
+    ═══════════════════════════════════════════════════ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Global color transitions on theme change */
+    html * {
+      transition: background-color 200ms ease, border-color 200ms ease, color 200ms ease;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    /* Override transitions on interactive elements to be faster */
+    button, a { transition: all 150ms ease !important; }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ═══════════════════════════════════════════════════
+       Layout
+    ═══════════════════════════════════════════════════ */
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .body-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px;
+      align-items: start;
+      flex: 1;
+      width: 100%;
+    }
+
+    .main-column {
+      padding: 24px 0 48px 32px;
+      min-width: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       Header responsive
+    ═══════════════════════════════════════════════════ */
+    .header-inner { padding: 0 48px; }
+
+    /* ═══════════════════════════════════════════════════
+       Subscribe button
+    ═══════════════════════════════════════════════════ */
+    .subscribe-btn {
+      display: inline-flex;
+      align-items: center;
+      height: '30px';
+      padding: 0 14px;
+      height: 30px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-primary);
+      color: var(--color-primary);
+      background: transparent;
+      font-size: var(--text-sm);
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .subscribe-btn:hover {
+      background-color: var(--color-primary) !important;
+      color: #fff !important;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       Domain badges
+    ═══════════════════════════════════════════════════ */
+    .domain-badge {
+      display: inline-flex;
+      align-items: center;
+      height: 26px;
+      padding: 0 10px;
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .badge-domain-ai {
+      background-color: var(--domain-ai-bg);
+      color: var(--domain-ai-text);
+    }
+    .badge-domain-semi {
+      background-color: var(--domain-semi-bg);
+      color: var(--domain-semi-text);
+    }
+    .badge-domain-quantum {
+      background-color: var(--domain-quantum-bg);
+      color: var(--domain-quantum-text);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       Signal card hover
+    ═══════════════════════════════════════════════════ */
+    .signal-card:hover {
+      box-shadow: var(--shadow-md) !important;
+      border-color: rgba(26, 86, 219, 0.3) !important;
+    }
+
+    [data-theme="dark"] .signal-card:hover {
+      border-color: rgba(77, 126, 247, 0.3) !important;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       Mobile filter bar
+    ═══════════════════════════════════════════════════ */
+    .mobile-filter-bar {
+      display: none;
+      overflow-x: auto;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-divider);
+      scrollbar-width: none;
+    }
+    .mobile-filter-bar::-webkit-scrollbar { display: none; }
+
+    /* ═══════════════════════════════════════════════════
+       Responsive
+    ═══════════════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      .hide-mobile { display: none !important; }
+
+      .header-inner { padding: 0 16px !important; }
+
+      .body-layout {
+        grid-template-columns: 1fr;
+        padding: 0 16px;
+      }
+
+      .main-column {
+        padding: 16px 0 48px;
+      }
+
+      /* Hide sidebar on mobile */
+      aside {
+        display: none !important;
+      }
+
+      .mobile-filter-bar {
+        display: flex !important;
+      }
+
+      /* Trust strip responsive */
+      .trust-strip-inner {
+        flex-wrap: wrap;
+        padding: 16px !important;
+        gap: 0 !important;
+      }
+
+      .trust-divider { display: none !important; }
+      .trust-editorial { display: none !important; }
+
+      .trust-stat {
+        flex: 0 0 50% !important;
+        padding: 8px 8px !important;
+      }
+
+      /* Footer responsive */
+      .footer-inner {
+        flex-direction: column !important;
+        padding: 20px 16px !important;
+        gap: 16px !important;
+      }
+
+      /* Card responsive */
+      .signal-card { margin-bottom: 10px; }
+
+      /* Outcome grid on mobile */
+      .outcome-grid {
+        grid-template-columns: 1fr !important;
+      }
+      .outcome-arrow { display: none !important; }
+    }
+
+    /* ═══════════════════════════════════════════════════
+       Scrollbar styling
+    ═══════════════════════════════════════════════════ */
+    aside::-webkit-scrollbar { width: 4px; }
+    aside::-webkit-scrollbar-track { background: transparent; }
+    aside::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 4px; }
+
+    /* ═══════════════════════════════════════════════════
+       Loading skeleton pulse
+    ═══════════════════════════════════════════════════ */
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.7; }
+    }
+    .skeleton {
+      background: var(--color-surface-offset);
+      border-radius: var(--radius-md);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="components/layout.jsx"></script>
+<script type="text/babel" src="components/filter-sidebar.jsx"></script>
+<script type="text/babel" src="components/signal-card.jsx"></script>
+
+<script type="text/babel">
+const { useState, useEffect, useMemo, useCallback } = React;
+
+// ─── Mobile filter chip ─────────────────────────────────────────────────────
+
+function MobileChip({ label, active, dot, onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '5px',
+        height: '30px',
+        padding: '0 12px',
+        borderRadius: 'var(--radius-full)',
+        border: active ? '1.5px solid var(--color-primary)' : '1px solid var(--color-border)',
+        backgroundColor: active ? 'var(--color-accent-highlight)' : 'var(--color-surface)',
+        color: active ? 'var(--color-primary)' : 'var(--color-text-muted)',
+        fontSize: 'var(--text-sm)',
+        fontWeight: active ? 500 : 400,
+        cursor: 'pointer',
+        whiteSpace: 'nowrap',
+        fontFamily: "'Inter', sans-serif",
+        flexShrink: 0,
+      }}
+    >
+      {dot && (
+        <span style={{
+          width: '6px', height: '6px',
+          borderRadius: '50%',
+          backgroundColor: dot,
+          flexShrink: 0,
+        }} />
+      )}
+      {label}
+    </button>
+  );
+}
+
+// ─── Empty State ────────────────────────────────────────────────────────────
+
+function EmptyState({ onReset }) {
+  return (
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      padding: '80px 0',
+      gap: '10px',
+      textAlign: 'center',
+    }}>
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <circle cx="16" cy="16" r="11" stroke="var(--color-text-faint)" strokeWidth="1.5" />
+        <circle cx="16" cy="16" r="4" stroke="var(--color-text-faint)" strokeWidth="1.5" />
+        <line x1="16" y1="3" x2="16" y2="9" stroke="var(--color-text-faint)" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="16" y1="23" x2="16" y2="29" stroke="var(--color-text-faint)" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="3" y1="16" x2="9" y2="16" stroke="var(--color-text-faint)" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="23" y1="16" x2="29" y2="16" stroke="var(--color-text-faint)" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+      <h3 style={{
+        fontSize: 'var(--text-lg)',
+        fontWeight: 500,
+        color: 'var(--color-text-muted)',
+        marginTop: '8px',
+      }}>
+        No signals match these filters.
+      </h3>
+      <p style={{
+        fontSize: 'var(--text-sm)',
+        color: 'var(--color-text-muted)',
+        maxWidth: '280px',
+        lineHeight: 1.6,
+      }}>
+        Try removing a domain or status filter, or reset to see all signals.
+      </p>
+      <button
+        onClick={onReset}
+        style={{
+          background: 'none',
+          border: 'none',
+          color: 'var(--color-primary)',
+          fontSize: 'var(--text-sm)',
+          cursor: 'pointer',
+          padding: '4px 0',
+          marginTop: '4px',
+          fontFamily: "'Inter', sans-serif",
+        }}
+      >
+        Reset filters
+      </button>
+    </div>
+  );
+}
+
+// ─── Loading skeleton ────────────────────────────────────────────────────────
+
+function LoadingSkeleton() {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      {[1, 2, 3].map(i => (
+        <div key={i} style={{
+          backgroundColor: 'var(--color-surface)',
+          border: '1px solid var(--color-border)',
+          borderRadius: 'var(--radius-lg)',
+          padding: '20px 24px',
+          boxShadow: 'var(--shadow-sm)',
+        }}>
+          <div style={{ display: 'flex', gap: '8px', marginBottom: '14px' }}>
+            <div className="skeleton" style={{ width: '60px', height: '26px', borderRadius: 'var(--radius-full)' }} />
+            <div className="skeleton" style={{ width: '80px', height: '26px', borderRadius: 'var(--radius-full)' }} />
+          </div>
+          <div className="skeleton" style={{ width: `${70 + i * 8}%`, height: '20px', marginBottom: '10px' }} />
+          <div className="skeleton" style={{ width: '90%', height: '14px', marginBottom: '6px' }} />
+          <div className="skeleton" style={{ width: '60%', height: '14px' }} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ─── Main App ────────────────────────────────────────────────────────────────
+
+function App() {
+  const [signals, setSignals] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const [theme, setTheme] = useState(() =>
+    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  );
+
+  const [expandedIds, setExpandedIds] = useState(new Set());
+
+  const [filters, setFilters] = useState({
+    domains: [],
+    statuses: [],
+    minConfidence: 3,
+    horizon: null,
+  });
+
+  const [sortBy, setSortBy] = useState('recent');
+
+  // Load signals
+  useEffect(() => {
+    fetch('signals/signals.json')
+      .then(r => r.json())
+      .then(data => { setSignals(data.signals); setLoading(false); })
+      .catch(() => setLoading(false));
+  }, []);
+
+  // Apply theme to html element
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  // Filter + sort
+  const filteredSignals = useMemo(() => {
+    let result = [...signals];
+    if (filters.domains.length > 0) result = result.filter(s => filters.domains.includes(s.domain));
+    if (filters.statuses.length > 0) result = result.filter(s => filters.statuses.includes(s.status));
+    result = result.filter(s => s.confidence >= filters.minConfidence);
+    if (filters.horizon) result = result.filter(s => s.horizon === filters.horizon);
+
+    if (sortBy === 'recent') {
+      result.sort((a, b) => new Date(b.date_updated) - new Date(a.date_updated));
+    } else if (sortBy === 'confidence') {
+      result.sort((a, b) => b.confidence - a.confidence || new Date(b.date_updated) - new Date(a.date_updated));
+    } else if (sortBy === 'horizon') {
+      const order = { '6-12': 1, '12-18': 2, '18-24': 3 };
+      result.sort((a, b) => order[a.horizon] - order[b.horizon]);
+    }
+    return result;
+  }, [signals, filters, sortBy]);
+
+  // Toggle expand — single at a time; shift-click for multi
+  const toggleExpand = useCallback((id, shiftKey = false) => {
+    setExpandedIds(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        if (!shiftKey) next.clear();
+        next.add(id);
+      }
+      return next;
+    });
+  }, []);
+
+  const hasActiveFilters = filters.domains.length > 0 || filters.statuses.length > 0 ||
+    filters.minConfidence !== 3 || filters.horizon !== null;
+
+  const resetFilters = useCallback(() =>
+    setFilters({ domains: [], statuses: [], minConfidence: 3, horizon: null }), []);
+
+  const hasClosedSignals = signals.some(s => s.status === 'resolved' || s.status === 'invalidated');
+
+  // Mobile domain/status chips
+  const allDomains = [...new Set(signals.map(s => s.domain))];
+  const allStatuses = [...new Set(signals.map(s => s.status))];
+  const STATUS_DOTS = {
+    active: 'var(--status-active)', developing: 'var(--status-developing)',
+    resolved: 'var(--status-resolved)', invalidated: 'var(--status-invalidated)',
+  };
+  const STATUS_LABELS_MAP = { active: 'Active', developing: 'Developing', resolved: 'Resolved', invalidated: 'Invalidated' };
+
+  return (
+    <div className="page-wrapper">
+      <Header
+        theme={theme}
+        onThemeToggle={() => setTheme(t => t === 'light' ? 'dark' : 'light')}
+      />
+
+      <TrustAnchorStrip signals={signals} />
+
+      {/* Mobile filter bar */}
+      <div className="mobile-filter-bar">
+        {allDomains.map(d => (
+          <MobileChip
+            key={d}
+            label={d === 'Artificial Intelligence' ? 'AI' : d}
+            active={filters.domains.includes(d)}
+            onClick={() => {
+              const next = filters.domains.includes(d)
+                ? filters.domains.filter(x => x !== d)
+                : [...filters.domains, d];
+              setFilters({ ...filters, domains: next });
+            }}
+          />
+        ))}
+        {allStatuses.map(st => (
+          <MobileChip
+            key={st}
+            label={STATUS_LABELS_MAP[st]}
+            active={filters.statuses.includes(st)}
+            dot={STATUS_DOTS[st]}
+            onClick={() => {
+              const next = filters.statuses.includes(st)
+                ? filters.statuses.filter(x => x !== st)
+                : [...filters.statuses, st];
+              setFilters({ ...filters, statuses: next });
+            }}
+          />
+        ))}
+        {hasActiveFilters && (
+          <MobileChip label="Reset" active={false} onClick={resetFilters} />
+        )}
+      </div>
+
+      <div className="body-layout">
+        <FilterSidebar
+          signals={signals}
+          filters={filters}
+          onFiltersChange={setFilters}
+          sortBy={sortBy}
+          onSortChange={setSortBy}
+          hasActiveFilters={hasActiveFilters}
+          onReset={resetFilters}
+        />
+
+        <main className="main-column">
+          {loading ? (
+            <LoadingSkeleton />
+          ) : filteredSignals.length === 0 ? (
+            <EmptyState onReset={resetFilters} />
+          ) : (
+            <>
+              {/* Signal count */}
+              <div style={{
+                fontSize: 'var(--text-xs)',
+                color: 'var(--color-text-faint)',
+                marginBottom: '16px',
+                letterSpacing: '0.02em',
+                fontVariantNumeric: 'tabular-nums',
+              }}>
+                {filteredSignals.length} signal{filteredSignals.length !== 1 ? 's' : ''}
+                {hasActiveFilters ? ' matching filters' : ''}
+              </div>
+
+              {filteredSignals.map(signal => (
+                <SignalCard
+                  key={signal.id}
+                  signal={signal}
+                  isExpanded={expandedIds.has(signal.id)}
+                  onToggle={(e) => toggleExpand(signal.id, e && e.shiftKey)}
+                />
+              ))}
+
+              {/* Track record note — shown when no closed signals yet */}
+              {!hasClosedSignals && (
+                <p style={{
+                  textAlign: 'center',
+                  paddingTop: '32px',
+                  paddingBottom: '16px',
+                  color: 'var(--color-text-faint)',
+                  fontSize: 'var(--text-sm)',
+                  lineHeight: 1.7,
+                  maxWidth: '480px',
+                  margin: '0 auto',
+                }}>
+                  Resolved and Invalidated signals will appear here as signals reach their forecast horizon. Outcomes are always recorded publicly.
+                </p>
+              )}
+            </>
+          )}
+        </main>
+      </div>
+
+      <Footer />
+    </div>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+</body>
+</html>

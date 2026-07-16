@@ -1,0 +1,239 @@
+{
+  "meta": {
+    "last_updated": "2026-07-15",
+    "version": "2.1",
+    "note": "Validated by founder 2026-07-15: confidence scores reviewed, sig-008 (crypto quantum repricing) and sig-010 (error-correction vs consensus roadmaps) removed pre-publication. Replaces v1.0 placeholder data entirely. Ready to swap into signals.json."
+  },
+  "signals": [
+    {
+      "id": "sig-001",
+      "title": "The Discovery & Routing layer is the unclaimed strategic layer of agentic commerce",
+      "domain": "Artificial Intelligence",
+      "status": "active",
+      "confidence": 4,
+      "horizon": "12-18",
+      "thesis": "Above identity, policy, and intent, a discovery and routing layer is forming in agentic commerce that no player has yet formally named or governed. Current registries (x402 Bazaar, MPPscan, AgentCash) are optimized exclusively for outcome transactions — reliability, cost, latency — with no commercial implementation able to distinguish outcome intent from experience intent. Whoever controls mode-aware discovery controls demand routing for agent-mediated commerce.",
+      "strategic_implication": "Merchants whose advantage lies in brand and experience are structurally invisible to current agentic discovery infrastructure. Payment networks, model providers, and merchant platforms will contest this layer within 12–18 months; strategy teams at consumer-facing companies should treat discovery-layer positioning as a first-class architectural decision, not a marketing question.",
+      "what_to_watch": [
+        "Model providers (OpenAI, Google, Anthropic) formalizing merchant registry or ranking programs",
+        "First discovery infrastructure to expose experience-mode signals (brand, curation) alongside cost/reliability",
+        "Card network moves (Visa Intelligent Commerce, Mastercard Agent Pay, Amex ACE) extending from authorization into discovery"
+      ],
+      "date_added": "2026-04-25",
+      "date_updated": "2026-07-11",
+      "related_briefs": [
+        {
+          "title": "Who Decides Where Agents Shop - Discovery Layer in Agentic Payments",
+          "url": "https://frontierwatch.substack.com/p/who-decides-where-agents-shop-discovery",
+          "date": "2026-04-25"
+        }
+      ],
+      "outcome": null
+    },
+    {
+      "id": "sig-002",
+      "title": "Outcome-optimized agent rails will commoditize brand-led commerce categories that pass through them",
+      "domain": "Artificial Intelligence",
+      "status": "active",
+      "confidence": 3,
+      "horizon": "18-24",
+      "thesis": "Agentic commerce volume is scaling fast ($262B agent-influenced holiday 2025 sales per Salesforce; $8B direct agentic transaction value in 2026 per Juniper, trending toward multi-trillion by 2030–31). Because current discovery infrastructure ranks purely on cost, reliability, and trust score, demand routed through agents will systematically strip brand equity of commercial relevance in categories where consumers would have chosen experience.",
+      "strategic_implication": "Consumer brands and merchants should model what share of their category flows through agent-mediated channels by 2028 and whether their differentiation survives mode-blind routing. Waiting for the infrastructure to mature means accepting the ranking logic others define.",
+      "what_to_watch": [
+        "Share of retail transactions initiated by agents in 2026 holiday season (Visa predicted millions of consumers)",
+        "Whether x402 / MPP transaction volumes sustain post-launch growth curves",
+        "First major brand publicly negotiating placement/ranking terms with an agent platform"
+      ],
+      "date_added": "2026-04-25",
+      "date_updated": "2026-07-11",
+      "related_briefs": [
+        {
+          "title": "Who Decides Where Agents Shop - Discovery Layer in Agentic Payments",
+          "url": "https://frontierwatch.substack.com/p/who-decides-where-agents-shop-discovery",
+          "date": "2026-04-25"
+        }
+      ],
+      "outcome": null
+    },
+    {
+      "id": "sig-003",
+      "title": "Enterprise AI lock-in has migrated from the model layer to cloud, data, and orchestration layers",
+      "domain": "Artificial Intelligence",
+      "status": "active",
+      "confidence": 4,
+      "horizon": "12-18",
+      "thesis": "GPT-4-class capability is commodity (token costs down ~300x since 2023), so lock-in has moved to three compounding layers: cloud agent runtimes (AgentCore, Gemini Enterprise, Azure AI Foundry), data control planes (Databricks Unity/MCP, Snowflake Cortex), and workflow orchestration (Agentforce, Copilot Studio). Enterprises making these three decisions independently across business units are accumulating multi-camp lock-in with compounding migration costs.",
+      "strategic_implication": "Strategy teams must map their camp exposure across all three layers now, before production commitments harden. The camp question belongs in M&A diligence: a target's AI stack portability is now a valuation variable.",
+      "what_to_watch": [
+        "Gartner's projection that >40% of agentic AI projects are canceled by end-2027",
+        "Whether enterprises consolidate to single-camp architectures or governance tooling emerges for multi-camp reality",
+        "Orchestration-layer switching-cost evidence: first public case of a large enterprise migrating off Agentforce or Copilot Studio"
+      ],
+      "date_added": "2026-05-09",
+      "date_updated": "2026-07-11",
+      "related_briefs": [
+        {
+          "title": "Enterprise AI Strategy - Vendor Lock-in and Your Choices",
+          "url": "https://frontierwatch.substack.com/p/enterprise-ai-strategy-vendor-lock",
+          "date": "2026-05-09"
+        }
+      ],
+      "outcome": null
+    },
+    {
+      "id": "sig-004",
+      "title": "MCP + A2A become the de facto portability standard for enterprise agent architectures",
+      "domain": "Artificial Intelligence",
+      "status": "active",
+      "confidence": 4,
+      "horizon": "6-12",
+      "thesis": "MCP adoption in enterprise production went from 31% to 78% of AI teams in a year, SDK downloads hit 97M/month, and both MCP and A2A now sit under the Linux Foundation's Agentic AI Foundation with all major vendors as co-founders. Open-protocol-native architectures will become the benchmark against which vendor lock-in is measured — but protocol portability will not equal operational portability (memory, workflow config, behavioral calibration remain sticky).",
+      "strategic_implication": "Enterprises should require MCP/A2A compatibility in AI vendor contracts as a floor, while budgeting for the fact that switching costs live above the protocol layer. Vendors' MCP support claims need diligence on what is actually portable.",
+      "what_to_watch": [
+        "MCP production adoption rate through 2026 (sustaining above 80%?)",
+        "First enterprise case studies quantifying migration cost between MCP-native platforms",
+        "Whether Salesforce/Microsoft proprietary connector ecosystems adopt or resist deep MCP integration"
+      ],
+      "date_added": "2026-05-09",
+      "date_updated": "2026-07-11",
+      "related_briefs": [
+        {
+          "title": "Enterprise AI Strategy - Vendor Lock-in and Your Choices",
+          "url": "https://frontierwatch.substack.com/p/enterprise-ai-strategy-vendor-lock",
+          "date": "2026-05-09"
+        }
+      ],
+      "outcome": null
+    },
+    {
+      "id": "sig-005",
+      "title": "The quantum stack is vertically integrating — capital is sorting real-revenue players from story stocks",
+      "domain": "Quantum Computing",
+      "status": "active",
+      "confidence": 3,
+      "horizon": "12-18",
+      "thesis": "March 2026 marked visible convergence: SEEQC's cryogenic control breakthrough (Nature Electronics), IBM's quantum-centric supercomputing reference architecture, IonQ crossing $130M revenue (60% commercial) and acquiring SkyWater foundry for $1.8B, and the UK's £2B ProQure procurement program. The sector is splitting between vertically integrating revenue generators and capital-rich, revenue-poor speculation vehicles; expect consolidation and supply-chain lock-up to accelerate.",
+      "strategic_implication": "Enterprises planning quantum posture should evaluate vendors on commercial revenue mix and supply-chain control, not qubit-count announcements. Sovereign procurement programs (UK model) will reshape vendor timelines and geography of capability.",
+      "what_to_watch": [
+        "IonQ-SkyWater integration speed post close — supply chain play vs. financial engineering",
+        "Whether other quantum firms pursue foundry/vertical integration moves",
+        "Additional sovereign procurement commitments following the UK's £2B ProQure"
+      ],
+      "date_added": "2026-04-24",
+      "date_updated": "2026-07-11",
+      "related_briefs": [
+        {
+          "title": "The Quantum Stack Is Starting to Close",
+          "url": "https://frontierwatch.substack.com/p/the-quantum-stack-is-starting-to",
+          "date": "2026-04-24"
+        }
+      ],
+      "outcome": null
+    },
+    {
+      "id": "sig-006",
+      "title": "Q-Day compression to ~2029 forces PQC migration mandates to tighten within 12 months",
+      "domain": "Quantum Computing",
+      "status": "active",
+      "confidence": 4,
+      "horizon": "6-12",
+      "thesis": "Google moved its Q-Day estimate to 2029 (from 2040s consensus), and March 2026 papers compressed quantum attack resource requirements by an order of magnitude. With harvest-now-decrypt-later already operational and enterprise PQC migrations taking 3–5 years, regulators and sector bodies will tighten migration deadlines within the next 12 months, creating immediate commercial demand for PQC tooling.",
+      "strategic_implication": "Any organization holding data sensitive beyond 2029 should have cryptographic inventory underway now. For strategy teams: PQC readiness is becoming a counterparty-risk and vendor-selection criterion, not just an internal IT project.",
+      "what_to_watch": [
+        "NIST / sector regulator responses to the 2029 estimate — tightened deadlines",
+        "SWIFT SwiftNet 8.0 PQC delivery against its 2027 target",
+        "Signature and final form of the White House quantum executive order"
+      ],
+      "date_added": "2026-04-24",
+      "date_updated": "2026-07-11",
+      "related_briefs": [
+        {
+          "title": "Encryption's Quantum Threat - Part 1",
+          "url": "https://frontierwatch.substack.com/p/encryptions-quantum-threat-part-1",
+          "date": "2026-04-24"
+        },
+        {
+          "title": "Encryption's Quantum Threat - Part 2: The Response and the Opportunity",
+          "url": "https://frontierwatch.substack.com/p/encryptions-quantum-threat-part-2",
+          "date": "2026-04-24"
+        }
+      ],
+      "outcome": null
+    },
+    {
+      "id": "sig-007",
+      "title": "PQC tooling market expands 5–7x in five years, led by crypto-agility platforms",
+      "domain": "Quantum Computing",
+      "status": "active",
+      "confidence": 3,
+      "horizon": "18-24",
+      "thesis": "The mandatory, regulation-driven nature of PQC migration creates a multi-year market expanding 5–7x even on conservative estimates. The winning category is crypto-agility platforms and migration tooling (discovery, key management, primitive rotation) rather than any single algorithm or hardware vendor, because large institutions cannot afford infrastructure rebuilds.",
+      "strategic_implication": "The clearest near-term indicator is which institutions start cryptographic inventory now. Companies enabling discovery and management of cryptographic exposure have a regulation-driven tailwind independent of quantum hardware outcomes.",
+      "what_to_watch": [
+        "HSM incumbents (Thales, Utimaco, Entrust) PQC revenue disclosures",
+        "Pure-play funding rounds and exits (PQShield, QuSecure, Crypto4A)",
+        "EU end-2030 critical financial infrastructure mandate enforcement signals"
+      ],
+      "date_added": "2026-04-24",
+      "date_updated": "2026-07-11",
+      "related_briefs": [
+        {
+          "title": "Encryption's Quantum Threat - Part 2: The Response and the Opportunity",
+          "url": "https://frontierwatch.substack.com/p/encryptions-quantum-threat-part-2",
+          "date": "2026-04-24"
+        }
+      ],
+      "outcome": null
+    },
+    {
+      "id": "sig-008",
+      "title": "The Quantum-AI flywheel reaches commercial viability within 18–24 months",
+      "domain": "Quantum Computing",
+      "status": "active",
+      "confidence": 3,
+      "horizon": "18-24",
+      "thesis": "AI and quantum have formed a bidirectional reinforcing loop: AI solves quantum's hardest engineering problems (AlphaQubit error-correction decoding running in production on Willow), while quantum accelerates specific AI workloads (QPA for LLM fine-tuning; UCL's 20-qubit system delivering 20% better accuracy at 100x less memory). With measurable results and capital lining up (Goldman $500M, Novo €188M), hybrid quantum-classical systems reach commercial viability in 18–24 months.",
+      "strategic_implication": "Financial services and pharma face the earliest exposure — their core problems are structurally quantum-native. Mid-market firms waiting for 'general availability' will be late; the actionable move now is quantum-ready data infrastructure and talent familiarity, not production deployment.",
+      "what_to_watch": [
+        "IBM Heron derivatives-pricing follow-ons with named corporate partners",
+        "Whether AlphaQubit-style neural decoders appear in competing hardware stacks",
+        "Hybrid quantum-classical workload pricing from cloud providers"
+      ],
+      "date_added": "2026-05-23",
+      "date_updated": "2026-07-11",
+      "related_briefs": [
+        {
+          "title": "Quantum - AI Convergence. The Flywheel effect",
+          "url": "https://frontierwatch.substack.com/p/quantum-ai-convergence-the-flywheel",
+          "date": "2026-05-23"
+        }
+      ],
+      "outcome": null
+    },
+    {
+      "id": "sig-009",
+      "title": "Guaranteed frontier AI capacity reprices upward while commodity token prices fall — workload bifurcation becomes the majority enterprise AI architecture",
+      "domain": "Artificial Intelligence",
+      "status": "active",
+      "confidence": 4,
+      "horizon": "12-18",
+      "thesis": "AI compute is splitting into two products with opposite price curves. Guaranteed frontier capacity (reserved GPU access) is repricing upward under physical constraint (record-low data center vacancy, power scarcity) and political constraint (first statewide moratorium signed July 2026, 100+ local moratoria) — AWS's January 2026 15% increase on reserved H200 capacity broke a two-decade cloud deflation pattern. Meanwhile commodity per-token prices for capability-equivalent models keep falling (~50x/year median). The spread drives workload bifurcation: frontier reasoning stays on repricing cloud capacity; standard workloads route to commodity or local execution via the orchestration/gateway layer that shipped in 2026 (Apple on-device routing; Microsoft hybrid platform; LiteLLM/Portkey/Kong gateways).",
+      "strategic_implication": "Enterprises should split AI budgets into two separately-forecast lines (commodity tokens vs. guaranteed capacity), stress-test 2027 reserved-capacity renewals at +15–30%, and pilot hybrid routing on one high-volume low-sensitivity workload to establish their own local-vs-cloud cost curve before vendor defaults harden.",
+      "what_to_watch": [
+        "Whether the January increase holds. An AWS price reversal, OR competitors publicly undercutting reserved capacity would read the Jan price hike as a blip, not a break.",
+        "The premium for guaranteed capacity. Reserved GPU capacity costs more than spot capacity for one reason: it guarantees access when supply is tight. NVIDIA's next-generation Blackwell chips reach volume through Q4 2026, which should loosen supply. If the reserved-versus-spot premium narrows as that happens, scarcity was temporary and this signal weakens. If the premium holds through the new supply, the constraint is structural and the signal strengthens.",
+        "Third-party adoption of the new orchestration layers — the bifurcation only becomes architecture when developers route through it."
+      ],
+      "date_added": "2026-07-15",
+      "date_updated": "2026-07-15",
+      "related_briefs": [
+        {
+          "title": "The Price of Intelligence Is Falling. The Price of Certainty Is Rising.",
+          "url": "https://frontierwatch.substack.com/p/the-price-of-intelligence-is-falling",
+          "date": "2026-07-15"
+        }
+      ],
+      "outcome": null
+    }
+  ]
+}
