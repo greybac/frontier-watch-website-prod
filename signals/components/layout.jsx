@@ -60,27 +60,20 @@ function Header({ theme, onThemeToggle }) {
         alignItems: 'center',
         gap: '0',
       }} className="header-inner">
-        {/* Wordmark */}
-        <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '0', textDecoration: 'none' }}>
+        {/* Wordmark — matches home page */}
+        <a href="../index.html" style={{ display: 'flex', alignItems: 'baseline', gap: '5px', textDecoration: 'none' }}>
           <span style={{
             fontFamily: "'Inter', sans-serif",
             fontWeight: 600,
             fontSize: '17px',
             color: 'var(--color-text)',
-            letterSpacing: '-0.02em',
           }}>Frontier</span>
-          <span style={{
-            color: 'var(--color-border)',
-            fontSize: '16px',
-            margin: '0 5px',
-            fontWeight: 300,
-          }}>|</span>
           <span style={{
             fontFamily: "'Instrument Serif', serif",
             fontStyle: 'italic',
-            fontSize: '17px',
+            fontSize: '19px',
             color: 'var(--color-text)',
-          }}>Signals</span>
+          }}>Watch</span>
         </a>
 
         {/* Breadcrumb */}
@@ -90,7 +83,7 @@ function Header({ theme, onThemeToggle }) {
           fontWeight: 400,
           fontSize: 'var(--text-sm)',
           color: 'var(--color-text-muted)',
-        }}>Signal Tracker</span>
+        }}>Signals</span>
 
         {/* Spacer */}
         <div style={{ flex: 1 }} />
@@ -103,7 +96,7 @@ function Header({ theme, onThemeToggle }) {
           marginRight: '16px',
           letterSpacing: '0.01em',
         }}>
-          Updated May 9, 2026
+          Updated Jul 17, 2026
         </span>
 
         {/* Theme toggle */}
@@ -211,10 +204,11 @@ function TrustAnchorStrip({ signals }) {
               Updated Weekly
             </div>
             <div style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)', marginTop: '3px' }}>
-              Last update: May 9, 2026
+              Last update: Jul 17, 2026
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-faint)', marginTop: '2px' }}>
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-faint)', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '5px' }}>
               Track record: live
+              <span className="live-dot" />
             </div>
           </div>
         </div>
@@ -257,10 +251,9 @@ function Footer() {
       }} className="footer-inner">
         {/* Left: logo + disclaimer */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', marginBottom: '6px' }}>
-            <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: '15px', color: 'var(--color-text)', letterSpacing: '-0.02em' }}>Frontier</span>
-            <span style={{ color: 'var(--color-border)', fontSize: '14px', margin: '0 4px', fontWeight: 300 }}>|</span>
-            <span style={{ fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: '15px', color: 'var(--color-text)' }}>Signals</span>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginBottom: '6px' }}>
+            <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: '15px', color: 'var(--color-text)' }}>Frontier</span>
+            <span style={{ fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: '17px', color: 'var(--color-text)' }}>Watch</span>
           </div>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-faint)', lineHeight: 1.6 }}>
             Frontier Watch LLC. Technology intelligence for strategy professionals.<br />Not investment advice.

@@ -159,26 +159,41 @@
     /* ═══════════════════════════════════════════════════
        Subscribe button
     ═══════════════════════════════════════════════════ */
+    /* Matches .btn-ghost on the home page */
     .subscribe-btn {
       display: inline-flex;
       align-items: center;
-      height: '30px';
-      padding: 0 14px;
-      height: 30px;
-      border-radius: var(--radius-full);
+      padding: 6px 16px;
+      border-radius: 6px;
       border: 1px solid var(--color-primary);
       color: var(--color-primary);
       background: transparent;
       font-size: var(--text-sm);
       font-weight: 500;
       font-family: 'Inter', sans-serif;
-      letter-spacing: -0.01em;
       cursor: pointer;
       text-decoration: none;
     }
     .subscribe-btn:hover {
       background-color: var(--color-primary) !important;
       color: #fff !important;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       Live indicator dot
+    ═══════════════════════════════════════════════════ */
+    @keyframes live-pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+      50% { opacity: 0.55; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0); }
+    }
+    .live-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--status-active);
+      animation: live-pulse 1.8s ease-in-out infinite;
+      flex-shrink: 0;
     }
 
     /* ═══════════════════════════════════════════════════
@@ -448,9 +463,11 @@ function App() {
   const [signals, setSignals] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const [theme, setTheme] = useState(() =>
-    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  );
+  // Shared with the home page via localStorage; default is light
+  const [theme, setTheme] = useState(() => {
+    try { return localStorage.getItem('fw-theme') === 'dark' ? 'dark' : 'light'; }
+    catch { return 'light'; }
+  });
 
   const [expandedIds, setExpandedIds] = useState(new Set());
 
@@ -471,9 +488,10 @@ function App() {
       .catch(() => setLoading(false));
   }, []);
 
-  // Apply theme to html element
+  // Apply theme to html element + persist for the home page
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+    try { localStorage.setItem('fw-theme', theme); } catch {}
   }, [theme]);
 
   // Filter + sort

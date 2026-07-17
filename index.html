@@ -94,6 +94,39 @@
   }
   .hero-sub strong { color: var(--text); font-weight: 600; }
 
+  /* Hero CTA — Signal Tracker */
+  .hero-cta { margin-top: 32px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .btn-tracker {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--accent); color: #fff;
+    font-size: 15px; font-weight: 550;
+    padding: 13px 26px; border-radius: 8px;
+    transition: background 160ms, transform 160ms, box-shadow 160ms;
+    animation: tracker-glow 3s ease-in-out infinite;
+  }
+  .btn-tracker:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px color-mix(in srgb, var(--accent) 35%, transparent);
+    animation: none;
+  }
+  .btn-tracker .arrow { transition: transform 160ms; }
+  .btn-tracker:hover .arrow { transform: translateX(3px); }
+  @keyframes tracker-glow {
+    0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 35%, transparent); }
+    50% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--accent) 0%, transparent); }
+  }
+  .live-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #34D399; flex-shrink: 0;
+    animation: live-pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes live-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+  }
+  .hero-cta-note { font-size: 13px; color: var(--text-faint); }
+
   /* Definition strip */
   .definition {
     border-top: 1px solid var(--divider);
@@ -226,6 +259,14 @@
     <h1>Frontier tech moves faster than your <em>intelligence stack.</em></h1>
     <p class="hero-sub">The intelligence available to strategy leaders is either expensive and backward-looking, too generic to act on, or too raw to trust. <strong>Frontier Watch is the gap between those worlds</strong> — professional-grade foresight on frontier technologies: evidence-backed, forward-looking, and self-serve.</p>
     <p class="hero-sub">We don't summarize the news. We publish opinionated analysis with a public track record — and update it when the evidence changes.</p>
+    <div class="hero-cta">
+      <a class="btn-tracker" href="signals/index.html">
+        <span class="live-dot"></span>
+        Explore the Signal Tracker
+        <span class="arrow">→</span>
+      </a>
+      <span class="hero-cta-note">Every signal, confidence-scored and tracked publicly</span>
+    </div>
   </div>
 </section>
 
@@ -303,11 +344,17 @@
   const icon = document.getElementById('themeIcon');
   const sun = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4m11.4-11.4 1.4-1.4"/>';
   const moon = '<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>';
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches) { root.dataset.theme = 'dark'; icon.innerHTML = sun; }
+  // Theme is shared with /signals via localStorage; default is light
+  let saved = 'light';
+  try { saved = localStorage.getItem('fw-theme') === 'dark' ? 'dark' : 'light'; } catch {}
+  root.dataset.theme = saved;
+  icon.innerHTML = saved === 'dark' ? sun : moon;
   btn.addEventListener('click', () => {
     const dark = root.dataset.theme === 'dark';
-    root.dataset.theme = dark ? 'light' : 'dark';
+    const next = dark ? 'light' : 'dark';
+    root.dataset.theme = next;
     icon.innerHTML = dark ? moon : sun;
+    try { localStorage.setItem('fw-theme', next); } catch {}
   });
 </script>
 </body>

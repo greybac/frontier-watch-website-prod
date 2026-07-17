@@ -142,17 +142,27 @@ function HorizonChip({ horizon }) {
     <span style={{
       display: 'inline-flex',
       alignItems: 'center',
+      gap: '6px',
       height: '24px',
       padding: '0 8px',
       borderRadius: 'var(--radius-sm)',
       fontSize: 'var(--text-xs)',
-      fontWeight: 500,
-      color: 'var(--color-text-faint)',
       backgroundColor: 'var(--color-surface-offset)',
       border: '1px solid var(--color-border)',
       letterSpacing: '0.01em',
     }}>
-      {horizonLabel(horizon)}
+      <span style={{
+        fontWeight: 500,
+        color: 'var(--color-text-muted)',
+        textTransform: 'uppercase',
+        letterSpacing: '0.05em',
+        fontSize: '10px',
+      }}>Time Horizon</span>
+      <span style={{
+        fontWeight: 600,
+        color: 'var(--color-text)',
+        fontVariantNumeric: 'tabular-nums',
+      }}>{horizonLabel(horizon)}</span>
     </span>
   );
 }
