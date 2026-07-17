@@ -78,7 +78,7 @@ function Header({ theme, onThemeToggle }) {
 
         {/* Breadcrumb */}
         <span style={{ color: 'var(--color-text-faint)', fontSize: '14px', margin: '0 8px 0 10px' }}>/</span>
-        <span className="hide-mobile" style={{
+        <span style={{
           fontFamily: "'Inter', sans-serif",
           fontWeight: 400,
           fontSize: 'var(--text-sm)',
@@ -167,7 +167,7 @@ function TrustAnchorStrip({ signals }) {
         gap: '0',
       }} className="trust-strip-inner">
         {/* Stats group — flex:1 so it fills space, leaving room for editorial */}
-        <div style={{ flex: 1, display: 'flex', alignItems: 'flex-start', gap: '0', minWidth: 0 }}>
+        <div className="trust-stats-group" style={{ flex: 1, display: 'flex', alignItems: 'flex-start', gap: '0', minWidth: 0 }}>
           {/* Stat 1 */}
           <div className="trust-stat" style={{ flex: '0 0 auto', paddingRight: '32px' }}>
             <div style={{ fontSize: '22px', fontWeight: 600, color: 'var(--color-text)', lineHeight: 1.2, fontVariantNumeric: 'tabular-nums' }}>
