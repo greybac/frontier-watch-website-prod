@@ -264,8 +264,8 @@ function Footer() {
         <div style={{ display: 'flex', gap: '24px', alignItems: 'center', paddingTop: '2px' }}>
           {[
             { label: 'Newsletter', href: 'https://frontierwatch.substack.com' },
-            { label: 'LinkedIn', href: '#' },
-            { label: 'About', href: '#' },
+            { label: 'LinkedIn', href: 'https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7248378826097901568' },
+            { label: 'About', href: 'https://frontierwatch.substack.com/about' },
           ].map(link => (
             <a
               key={link.label}
