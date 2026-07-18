@@ -164,10 +164,27 @@
   [data-theme="dark"] .badge-domain { background: #1E2145; color: #A5B4FC; }
   .badge-status { font-size: 12px; color: var(--text-muted); display: inline-flex; align-items: center; gap: 6px; }
   .badge-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--status-active); }
-  .confidence { margin-left: auto; display: flex; gap: 4px; align-items: center; }
-  .confidence span { width: 8px; height: 8px; border-radius: 50%; background: var(--surface-offset); border: 1px solid var(--border); }
-  .confidence span.on { background: var(--accent); border-color: var(--accent); }
-  .confidence .conf-label { width: auto; height: auto; border: none; background: none; font-size: 11px; color: var(--text-faint); margin-left: 4px; }
+  .signal-top-spacer { flex: 1; }
+  .confidence { display: flex; align-items: center; gap: 6px; }
+  .confidence .conf-label {
+    font-size: 10px; font-weight: 500; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .confidence .conf-score { font-size: 14px; font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
+  .confidence .conf-dots { display: flex; gap: 4px; align-items: center; }
+  .confidence .conf-dots span { width: 8px; height: 8px; border-radius: 50%; background: var(--surface-offset); border: 1px solid var(--border); display: inline-block; }
+  .confidence .conf-dots span.on { background: var(--accent); border-color: var(--accent); }
+  .horizon-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    height: 24px; padding: 0 8px; border-radius: 4px;
+    background: var(--surface-offset); border: 1px solid var(--border);
+    font-size: 12px; letter-spacing: 0.01em;
+  }
+  .horizon-chip .horizon-label {
+    font-weight: 500; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.05em; font-size: 10px;
+  }
+  .horizon-chip .horizon-value { font-weight: 600; color: var(--text); font-variant-numeric: tabular-nums; }
   .signal-title { font-size: 21px; font-weight: 550; letter-spacing: -0.01em; line-height: 1.3; margin-bottom: 12px; }
   .signal-thesis { font-size: 15px; color: var(--text-muted); margin-bottom: 18px; }
   .implication {
@@ -289,9 +306,17 @@
       <div class="signal-top">
         <span class="badge-domain">AI INFRASTRUCTURE</span>
         <span class="badge-status">Active</span>
+        <div class="signal-top-spacer"></div>
         <div class="confidence" title="Confidence 4/5 — strong evidence, minor gaps in supporting data">
-          <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span>
-          <span class="conf-label">4/5 · 12–24 mo</span>
+          <span class="conf-label">Confidence</span>
+          <span class="conf-score">4</span>
+          <span class="conf-dots">
+            <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span>
+          </span>
+        </div>
+        <div class="horizon-chip">
+          <span class="horizon-label">Time Horizon</span>
+          <span class="horizon-value">12–24 mo</span>
         </div>
       </div>
       <h2 class="signal-title">AI lock-in has moved from the model layer to the orchestration stack — and strategy teams aren't in the room.</h2>
@@ -329,7 +354,7 @@
   <div class="container">
     <div class="footer-left">
       <div class="wordmark"><span class="fw-1">Frontier</span><span class="fw-2">Watch</span></div>
-      <p>&copy; 2026 Frontier Watch LLC. Technology intelligence for strategy professionals. Nothing published here constitutes investment, financial, legal, or professional advice.</p>
+      <p>&copy; 2026 Frontier Watch is Technology intelligence for strategy professionals. Nothing published here constitutes investment, financial, legal, or professional advice.</p>
     </div>
     <div class="footer-links">
       <a href="https://frontierwatch.substack.com" target="_blank" rel="noopener">Newsletter</a>

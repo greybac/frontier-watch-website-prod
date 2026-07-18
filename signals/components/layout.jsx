@@ -174,7 +174,7 @@ function TrustAnchorStrip({ signals }) {
               {stats.activeCount} Active Signal{stats.activeCount !== 1 ? 's' : ''}
             </div>
             <div style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)', marginTop: '3px' }}>
-              Tracking frontier tech
+              Tracking Frontier Tech
             </div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-faint)', marginTop: '2px' }}>
               developments since April 2026
@@ -207,7 +207,7 @@ function TrustAnchorStrip({ signals }) {
               Last update: Jul 17, 2026
             </div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-faint)', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '5px' }}>
-              Track record: live
+              Track record: Live
               <span className="live-dot" />
             </div>
           </div>
@@ -256,7 +256,7 @@ function Footer() {
             <span style={{ fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: '17px', color: 'var(--color-text)' }}>Watch</span>
           </div>
           <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-faint)', lineHeight: 1.6 }}>
-            Frontier Watch LLC. Technology intelligence for strategy professionals.<br />Not investment advice.
+            Frontier Watch is Technology intelligence for strategy professionals.<br />Not investment advice.
           </div>
         </div>
 

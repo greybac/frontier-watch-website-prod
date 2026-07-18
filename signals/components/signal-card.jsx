@@ -73,29 +73,44 @@ function MicroLabel({ children, style = {} }) {
   );
 }
 
-function ConfidenceDots({ score }) {
+function ConfidenceIndicator({ score }) {
   return (
     <div
       title={CONFIDENCE_TIPS[score]}
-      style={{ display: 'flex', gap: '4px', alignItems: 'center', cursor: 'default' }}
+      style={{ display: 'flex', gap: '6px', alignItems: 'center', cursor: 'default' }}
     >
-      {[1, 2, 3, 4, 5].map(i => (
-        <span
-          key={i}
-          style={{
-            width: '8px',
-            height: '8px',
-            borderRadius: '50%',
-            backgroundColor: i <= score
-              ? 'var(--color-primary)'
-              : 'var(--color-surface-offset)',
-            border: i <= score ? 'none' : '1.5px solid var(--color-border)',
-            display: 'inline-block',
-            flexShrink: 0,
-            transition: 'background-color 200ms',
-          }}
-        />
-      ))}
+      <span style={{
+        fontSize: '10px',
+        fontWeight: 500,
+        color: 'var(--color-text-muted)',
+        textTransform: 'uppercase',
+        letterSpacing: '0.05em',
+      }}>Confidence</span>
+      <span style={{
+        fontSize: 'var(--text-sm)',
+        fontWeight: 600,
+        color: 'var(--color-text)',
+        fontVariantNumeric: 'tabular-nums',
+      }}>{score}/5</span>
+      <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+        {[1, 2, 3, 4, 5].map(i => (
+          <span
+            key={i}
+            style={{
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              backgroundColor: i <= score
+                ? 'var(--color-primary)'
+                : 'var(--color-surface-offset)',
+              border: i <= score ? 'none' : '1.5px solid var(--color-border)',
+              display: 'inline-block',
+              flexShrink: 0,
+              transition: 'background-color 200ms',
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -241,7 +256,7 @@ function SignalCard({ signal, isExpanded, onToggle }) {
           <DomainBadge domain={signal.domain} />
           <StatusBadge status={signal.status} />
           <div style={{ flex: 1 }} />
-          <ConfidenceDots score={signal.confidence} />
+          <ConfidenceIndicator score={signal.confidence} />
         </div>
 
         {/* Row 2: title */}
