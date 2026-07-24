@@ -35,7 +35,7 @@ function SunIcon() {
 
 // ─── Header ────────────────────────────────────────────────────────────────
 
-function Header({ theme, onThemeToggle }) {
+function Header({ theme, onThemeToggle, lastUpdated }) {
   const headerBg = theme === 'dark'
     ? 'rgba(19, 22, 32, 0.92)'
     : 'rgba(255, 255, 255, 0.92)';
@@ -96,7 +96,7 @@ function Header({ theme, onThemeToggle }) {
           marginRight: '16px',
           letterSpacing: '0.01em',
         }}>
-          Updated Jul 17, 2026
+          {lastUpdated ? `Updated ${formatDate(lastUpdated)}` : ''}
         </span>
 
         {/* Theme toggle */}
@@ -144,7 +144,7 @@ const DOMAIN_ABBREV = {
   'Quantum Computing': 'Quantum',
 };
 
-function TrustAnchorStrip({ signals }) {
+function TrustAnchorStrip({ signals, lastUpdated }) {
   const stats = useMemo(() => {
     const activeCount = signals.filter(s => s.status === 'active' || s.status === 'developing').length;
     const domains = [...new Set(signals.map(s => s.domain))];
@@ -204,7 +204,7 @@ function TrustAnchorStrip({ signals }) {
               Updated Weekly
             </div>
             <div style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)', marginTop: '3px' }}>
-              Last update: Jul 17, 2026
+              {lastUpdated ? `Last update: ${formatDate(lastUpdated)}` : 'Last update: —'}
             </div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-faint)', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '5px' }}>
               Track record: Live

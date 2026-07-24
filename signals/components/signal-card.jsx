@@ -194,6 +194,57 @@ function ExternalLinkIcon() {
 
 // ─── Main SignalCard ─────────────────────────────────────────────────────────
 
+// ─── Copy-link button ───────────────────────────────────────────────────────
+
+function CopyLinkButton({ signalId }) {
+  const [copied, setCopied] = useCardState(false);
+
+  const handleCopy = (e) => {
+    e.stopPropagation();
+    const url = window.location.origin + window.location.pathname + '#' + signalId;
+    const done = () => { setCopied(true); setTimeout(() => setCopied(false), 1600); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done).catch(() => {
+        // Fallback: still update the address bar so the link is grabbable
+        history.replaceState(null, '', '#' + signalId);
+        done();
+      });
+    } else {
+      history.replaceState(null, '', '#' + signalId);
+      done();
+    }
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      title="Copy a direct link to this signal"
+      aria-label="Copy link to this signal"
+      style={{
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '5px',
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+        padding: '2px 4px',
+        fontSize: 'var(--text-xs)',
+        fontWeight: 500,
+        fontFamily: "'Inter', sans-serif",
+        color: copied ? 'var(--status-active)' : 'var(--color-text-faint)',
+        userSelect: 'none',
+      }}
+    >
+      {copied ? (
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+      ) : (
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
+      )}
+      <span>{copied ? 'Copied' : 'Copy link'}</span>
+    </button>
+  );
+}
+
 function SignalCard({ signal, isExpanded, onToggle }) {
   const cardRef = useCardRef(null);
 
@@ -231,17 +282,16 @@ function SignalCard({ signal, isExpanded, onToggle }) {
   return (
     <article
       ref={cardRef}
+      id={signal.id}
       style={{ ...cardStyle, ...resolvedAccent }}
       className="signal-card"
       onClick={onToggle}
     >
-      {/* ── Collapsed header (sticky when expanded) ── */}
+      {/* ── Collapsed header ── */}
       <div
         style={{
-          position: isExpanded ? 'sticky' : 'relative',
-          top: isExpanded ? '57px' : 'auto',
+          position: 'relative',
           backgroundColor: isInvalidated ? 'var(--color-surface-offset)' : 'var(--color-surface)',
-          zIndex: isExpanded ? 5 : 'auto',
           padding: '20px 24px',
         }}
       >
@@ -300,6 +350,7 @@ function SignalCard({ signal, isExpanded, onToggle }) {
             Added {fmt(signal.date_added)}
           </span>
           <div style={{ flex: 1 }} />
+          <CopyLinkButton signalId={signal.id} />
           <span style={{
             fontSize: 'var(--text-sm)',
             color: 'var(--color-text-muted)',

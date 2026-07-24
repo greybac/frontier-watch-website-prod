@@ -1,8 +1,8 @@
 {
   "meta": {
-    "last_updated": "2026-07-15",
-    "version": "2.1",
-    "note": "Validated by founder 2026-07-15: confidence scores reviewed, sig-008 (crypto quantum repricing) and sig-010 (error-correction vs consensus roadmaps) removed pre-publication. Replaces v1.0 placeholder data entirely. Ready to swap into signals.json."
+    "last_updated": "2026-07-24",
+    "version": "2.3",
+    "note": "2026-07-24: 'Scoring My Quantum Signals' published (frontierwatch.substack.com/p/scoring-my-quantum-signals-from-march) and linked in sig-006 + sig-005 related_briefs. sig-005 confidence 3 -> 4 (IonQ-SkyWater deal now pending an FTC Second Request). sig-006 remains resolved (first public outcome). Prior (2.2): sig-006 resolved following the June 22 quantum/PQC executive orders."
   },
   "signals": [
     {
@@ -110,22 +110,27 @@
       "title": "The quantum stack is vertically integrating — capital is sorting real-revenue players from story stocks",
       "domain": "Quantum Computing",
       "status": "active",
-      "confidence": 3,
+      "confidence": 4,
       "horizon": "12-18",
       "thesis": "March 2026 marked visible convergence: SEEQC's cryogenic control breakthrough (Nature Electronics), IBM's quantum-centric supercomputing reference architecture, IonQ crossing $130M revenue (60% commercial) and acquiring SkyWater foundry for $1.8B, and the UK's £2B ProQure procurement program. The sector is splitting between vertically integrating revenue generators and capital-rich, revenue-poor speculation vehicles; expect consolidation and supply-chain lock-up to accelerate.",
       "strategic_implication": "Enterprises planning quantum posture should evaluate vendors on commercial revenue mix and supply-chain control, not qubit-count announcements. Sovereign procurement programs (UK model) will reshape vendor timelines and geography of capability.",
       "what_to_watch": [
-        "IonQ-SkyWater integration speed post close — supply chain play vs. financial engineering",
+        "IonQ-SkyWater close and integration speed — deal still pending an FTC Second Request (antitrust review extended); supply chain play vs. financial engineering",
         "Whether other quantum firms pursue foundry/vertical integration moves",
         "Additional sovereign procurement commitments following the UK's £2B ProQure"
       ],
-      "date_added": "2026-04-24",
-      "date_updated": "2026-07-11",
+      "date_added": "2026-03-28",
+      "date_updated": "2026-07-24",
       "related_briefs": [
         {
           "title": "The Quantum Stack Is Starting to Close",
           "url": "https://frontierwatch.substack.com/p/the-quantum-stack-is-starting-to",
           "date": "2026-04-24"
+        },
+        {
+          "title": "Scoring My Quantum Signals",
+          "url": "https://frontierwatch.substack.com/p/scoring-my-quantum-signals-from-march",
+          "date": "2026-07-24"
         }
       ],
       "outcome": null
@@ -134,31 +139,43 @@
       "id": "sig-006",
       "title": "Q-Day compression to ~2029 forces PQC migration mandates to tighten within 12 months",
       "domain": "Quantum Computing",
-      "status": "active",
+      "status": "resolved",
       "confidence": 4,
       "horizon": "6-12",
       "thesis": "Google moved its Q-Day estimate to 2029 (from 2040s consensus), and March 2026 papers compressed quantum attack resource requirements by an order of magnitude. With harvest-now-decrypt-later already operational and enterprise PQC migrations taking 3–5 years, regulators and sector bodies will tighten migration deadlines within the next 12 months, creating immediate commercial demand for PQC tooling.",
       "strategic_implication": "Any organization holding data sensitive beyond 2029 should have cryptographic inventory underway now. For strategy teams: PQC readiness is becoming a counterparty-risk and vendor-selection criterion, not just an internal IT project.",
       "what_to_watch": [
-        "NIST / sector regulator responses to the 2029 estimate — tightened deadlines",
-        "SWIFT SwiftNet 8.0 PQC delivery against its 2027 target",
-        "Signature and final form of the White House quantum executive order"
+        "FAR proposed rule (~Dec 19, 2026) — does it keep the Dec 31, 2030 contractor deadline and finally define 'covered contractors'?",
+        "Agency PQC migration plans due Oct 22, 2026 — real cryptographic inventory and funding, or placeholders?",
+        "First sector regulator (finance, health) to cite the EO's 2030/2031 dates in its own PQC guidance — the move that extends the perimeter beyond the federal supply chain"
       ],
-      "date_added": "2026-04-24",
-      "date_updated": "2026-07-11",
+      "date_added": "2026-03-28",
+      "date_updated": "2026-07-24",
       "related_briefs": [
         {
           "title": "Encryption's Quantum Threat - Part 1",
           "url": "https://frontierwatch.substack.com/p/encryptions-quantum-threat-part-1",
-          "date": "2026-04-24"
+          "date": "2026-04-15"
         },
         {
           "title": "Encryption's Quantum Threat - Part 2: The Response and the Opportunity",
           "url": "https://frontierwatch.substack.com/p/encryptions-quantum-threat-part-2",
-          "date": "2026-04-24"
+          "date": "2026-04-16"
+        },
+        {
+          "title": "Scoring My Quantum Signals",
+          "url": "https://frontierwatch.substack.com/p/scoring-my-quantum-signals-from-march",
+          "date": "2026-07-24"
         }
       ],
-      "outcome": null
+      "outcome": {
+        "resolved_date": "2026-06-22",
+        "verdict": "confirmed",
+        "original_thesis": "A ~2029 Q-Day compression would force PQC migration mandates to tighten within 12 months, via NIST or sector regulators, creating near-term commercial demand for PQC tooling.",
+        "what_happened": "Confirmed within the 12-month window. On June 22, 2026 the White House signed EO 14412 'Securing the Nation Against Advanced Cryptographic Attacks,' imposing the first binding federal PQC deadlines: key establishment on high-value/high-impact systems by Dec 31, 2030 and digital signatures by Dec 31, 2031, plus a FAR rule (due ~Dec 19, 2026) pulling covered federal contractors inside the same 2030 requirement. OMB executed two days later via memo M-26-15 (June 24): agency migration plans due Oct 22, 2026, TLS 1.3 mandatory by Jan 2, 2030, and NIST's 2035 endpoint preserved as the final phase.",
+        "mechanism_note": "Right outcome, different mechanism than forecast. The tightening came from the White House by executive order, not from NIST or sector regulators moving their own dates (NIST's 2035 guideline still stands). The mandate also rests partly on statute — the Quantum Computing Cybersecurity Preparedness Act of 2022 — which raises its durability against reversal.",
+        "still_open": "Private-sector reach is not yet settled: 'covered contractors' remains undefined pending the FAR rule, and no sector regulator has yet adopted the EO's dates. These are tracked in what_to_watch."
+      }
     },
     {
       "id": "sig-007",
