@@ -1,0 +1,80 @@
+/* ═══════════════════════════════════════════════════
+   Frontier Watch — shared design tokens
+   Single source of truth for home + tracker.
+   Naming convention: --color-*, --status-*, --domain-*,
+   --text-{xs..xl}, --radius-*, --shadow-*.
+═══════════════════════════════════════════════════ */
+:root {
+  --color-bg:             #F4F5F7;
+  --color-surface:        #FFFFFF;
+  --color-surface-2:      #F9FAFB;
+  --color-surface-offset: #EEF0F3;
+  --color-divider:        #E2E5EA;
+  --color-border:         #D3D7DE;
+
+  --color-text:           #0F1117;
+  --color-text-muted:     #6B7280;
+  --color-text-faint:     #9CA3AF; /* decorative only — fails AA, never for informational text */
+
+  --color-primary:        #1A56DB;
+  --color-primary-hover:  #1447C4;
+  --color-accent-highlight: #DBEAFE;
+
+  --status-active:        #047857;
+  --status-developing:    #B45309;
+  --status-resolved:      #1A56DB;
+  --status-invalidated:   #6B7280;
+
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-base: 16px;
+  --text-lg:   20px;
+  --text-xl:   28px;
+
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 2px rgba(15,17,23,0.05), 0 1px 4px rgba(15,17,23,0.04);
+  --shadow-md: 0 4px 16px rgba(15,17,23,0.08), 0 2px 6px rgba(15,17,23,0.05);
+
+  --domain-ai-bg:       #EEF2FF;
+  --domain-ai-text:     #3730A3;
+  --domain-semi-bg:     #FDF4E7;
+  --domain-semi-text:   #92400E;
+  --domain-quantum-bg:  #F0FDF4;
+  --domain-quantum-text:#166534;
+}
+
+[data-theme="dark"] {
+  --color-bg:             #0C0E12;
+  --color-surface:        #131620;
+  --color-surface-2:      #181C26;
+  --color-surface-offset: #1E2230;
+  --color-divider:        #252A38;
+  --color-border:         #2E3448;
+
+  --color-text:           #E8EBF0;
+  --color-text-muted:     #8892A4;
+  --color-text-faint:     #4A5268;
+
+  --color-primary:        #4D7EF7;
+  --color-primary-hover:  #3D6EE7;
+  --color-accent-highlight: #1E2F5A;
+
+  --status-active:        #10B981;
+  --status-developing:    #F59E0B;
+  --status-resolved:      #4D7EF7;
+  --status-invalidated:   #6B7280;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3), 0 1px 4px rgba(0,0,0,0.25);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.3);
+
+  --domain-ai-bg:        #1E1B4B;
+  --domain-ai-text:      #A5B4FC;
+  --domain-semi-bg:      #2D1F0E;
+  --domain-semi-text:    #FCD34D;
+  --domain-quantum-bg:   #052E16;
+  --domain-quantum-text: #6EE7B7;
+}

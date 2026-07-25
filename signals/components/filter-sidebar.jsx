@@ -41,7 +41,7 @@ function SectionLabel({ children }) {
       fontSize: '11px',
       fontWeight: 600,
       letterSpacing: '0.08em',
-      color: 'var(--color-text-faint)',
+      color: 'var(--color-text-muted)',
       textTransform: 'uppercase',
       marginBottom: '10px',
       marginTop: '24px',
@@ -52,8 +52,6 @@ function SectionLabel({ children }) {
 }
 
 function FilterSidebar({ signals, filters, onFiltersChange, sortBy, onSortChange, hasActiveFilters, onReset }) {
-  const [disabledTooltip, setDisabledTooltip] = useSidebarState(false);
-
   // Counts for domain chips (excluding domain filter itself)
   const domainCounts = useSidebarMemo(() => {
     let base = signals;
@@ -195,45 +193,41 @@ function FilterSidebar({ signals, filters, onFiltersChange, sortBy, onSortChange
       </div>
 
       {/* ── CONFIDENCE ── */}
-      <SectionLabel>Min. Confidence</SectionLabel>
-      <div style={{ display: 'flex', gap: '4px', position: 'relative' }}>
-        {[1, 2, 3, 4, 5].map(n => {
-          const disabled = n < 3;
-          const active = !disabled && filters.minConfidence === n;
+      <SectionLabel>Confidence</SectionLabel>
+      <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+        {[
+          { value: 3, label: 'All' },
+          { value: 4, label: '4+' },
+          { value: 5, label: '5 only' },
+        ].map(opt => {
+          const active = filters.minConfidence === opt.value;
           return (
-            <div key={n} style={{ position: 'relative' }}>
-              <button
-                onClick={() => !disabled && onFiltersChange({ ...filters, minConfidence: n })}
-                title={disabled ? 'Signals below 3 are not published per editorial standards.' : CONFIDENCE_TOOLTIP[n]}
-                style={{
-                  width: '40px',
-                  height: '34px',
-                  borderRadius: 'var(--radius-md)',
-                  border: active
-                    ? '1.5px solid var(--color-primary)'
-                    : '1px solid var(--color-border)',
-                  backgroundColor: active
-                    ? 'var(--color-primary)'
-                    : disabled
-                    ? 'transparent'
-                    : 'var(--color-surface-offset)',
-                  color: active ? '#fff' : disabled ? 'var(--color-text-faint)' : 'var(--color-text-muted)',
-                  fontSize: '13px',
-                  fontWeight: 500,
-                  cursor: disabled ? 'not-allowed' : 'pointer',
-                  opacity: disabled ? 0.45 : 1,
-                  fontFamily: "'Inter', sans-serif",
-                  transition: 'all 140ms',
-                }}
-              >
-                {n}
-              </button>
-            </div>
+            <button
+              key={opt.value}
+              onClick={() => onFiltersChange({ ...filters, minConfidence: opt.value })}
+              title={opt.value === 3 ? 'Show all published signals' : CONFIDENCE_TOOLTIP[opt.value]}
+              style={{
+                height: '30px',
+                padding: '0 14px',
+                borderRadius: 'var(--radius-full)',
+                border: active ? '1.5px solid var(--color-primary)' : '1px solid var(--color-border)',
+                backgroundColor: active ? 'var(--color-accent-highlight)' : 'var(--color-surface)',
+                color: active ? 'var(--color-primary)' : 'var(--color-text-muted)',
+                fontSize: '13px',
+                fontWeight: active ? 500 : 400,
+                cursor: 'pointer',
+                fontFamily: "'Inter', sans-serif",
+                transition: 'all 140ms',
+                fontVariantNumeric: 'tabular-nums',
+              }}
+            >
+              {opt.label}
+            </button>
           );
         })}
       </div>
-      <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-faint)', marginTop: '6px', lineHeight: 1.5 }}>
-        Scores 1–2 not published (editorial standard)
+      <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)', marginTop: '8px', lineHeight: 1.5 }}>
+        Signals below 3/5 confidence are not published — editorial standard.
       </div>
 
       {/* ── HORIZON ── */}
@@ -324,7 +318,7 @@ function DomainChip({ label, count, active, onClick }) {
         <span style={{
           fontSize: 'var(--text-xs)',
           fontWeight: 500,
-          color: active ? 'var(--color-primary)' : 'var(--color-text-faint)',
+          color: active ? 'var(--color-primary)' : 'var(--color-text-muted)',
           backgroundColor: active ? 'transparent' : 'var(--color-surface-offset)',
           padding: '1px 6px',
           borderRadius: 'var(--radius-full)',
@@ -386,7 +380,7 @@ function StatusChip({ label, statusKey, count, active, onClick }) {
         <span style={{
           fontSize: 'var(--text-xs)',
           fontWeight: 500,
-          color: active ? 'var(--color-primary)' : 'var(--color-text-faint)',
+          color: active ? 'var(--color-primary)' : 'var(--color-text-muted)',
           backgroundColor: active ? 'transparent' : 'var(--color-surface-offset)',
           padding: '1px 6px',
           borderRadius: 'var(--radius-full)',

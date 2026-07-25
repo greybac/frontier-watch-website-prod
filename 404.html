@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page not found — Frontier Watch</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..700&family=Instrument+Serif&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="stylesheet" href="/assets/tokens.css">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.65;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+    transition: background 200ms, color 200ms;
+  }
+  .mark {
+    color: var(--color-text-faint);
+    margin-bottom: 28px;
+  }
+  h1 {
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 650;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  h1 em { font-family: 'Instrument Serif', serif; font-style: normal; font-weight: 400; }
+  p {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    max-width: 460px;
+    margin-bottom: 32px;
+  }
+  .actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; align-items: center; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--color-primary); color: #fff;
+    font-size: 15px; font-weight: 550;
+    padding: 12px 24px; border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: background 160ms;
+  }
+  .btn-primary:hover { background: var(--color-primary-hover); }
+  .btn-secondary {
+    font-size: 14px; font-weight: 500;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    padding: 12px 8px;
+  }
+  .btn-secondary:hover { color: var(--color-primary); }
+  .code {
+    margin-top: 40px;
+    font-size: 12px;
+    color: var(--color-text-faint);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+
+<svg class="mark" width="72" height="72" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+  <g stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 7">
+    <path d="M27.35 41.97 A11 11 0 0 1 27.35 22.03"/>
+    <path d="M23 47.59 A18 18 0 0 1 23 16.41"/>
+    <path d="M17.66 52.48 A25 25 0 0 1 17.66 11.52"/>
+    <path d="M39.78 24.22 A11 11 0 0 1 39.78 39.78"/>
+    <path d="M43.57 18.21 A18 18 0 0 1 43.57 45.79"/>
+    <path d="M51.15 15.93 A25 25 0 0 1 51.15 48.07"/>
+  </g>
+  <circle cx="32" cy="32" r="4.5" fill="currentColor"/>
+</svg>
+
+<h1>No signal <em>on this frequency.</em></h1>
+<p>The page you're looking for doesn't exist — it may have moved, or the link was mistyped. The signals themselves are all still tracked, publicly.</p>
+
+<div class="actions">
+  <a class="btn-primary" href="/signals/">Explore the Signal Tracker →</a>
+  <a class="btn-secondary" href="/">Back to frontierwatch.io</a>
+</div>
+
+<div class="code">404 · Page not found</div>
+
+<script>
+  try {
+    if (localStorage.getItem('fw-theme') === 'dark') {
+      document.documentElement.dataset.theme = 'dark';
+    }
+  } catch {}
+</script>
+</body>
+</html>

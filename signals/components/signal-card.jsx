@@ -64,7 +64,7 @@ function MicroLabel({ children, style = {} }) {
       fontWeight: 600,
       letterSpacing: '0.08em',
       textTransform: 'uppercase',
-      color: 'var(--color-text-faint)',
+      color: 'var(--color-text-muted)',
       marginBottom: '8px',
       ...style,
     }}>
@@ -231,7 +231,7 @@ function CopyLinkButton({ signalId }) {
         fontSize: 'var(--text-xs)',
         fontWeight: 500,
         fontFamily: "'Inter', sans-serif",
-        color: copied ? 'var(--status-active)' : 'var(--color-text-faint)',
+        color: copied ? 'var(--status-active)' : 'var(--color-text-muted)',
         userSelect: 'none',
       }}
     >
@@ -344,34 +344,45 @@ function SignalCard({ signal, isExpanded, onToggle }) {
           <HorizonChip horizon={signal.horizon} />
           <span style={{
             fontSize: 'var(--text-xs)',
-            color: 'var(--color-text-faint)',
+            color: 'var(--color-text-muted)',
             fontVariantNumeric: 'tabular-nums',
           }}>
             Added {fmt(signal.date_added)}
           </span>
           <div style={{ flex: 1 }} />
           <CopyLinkButton signalId={signal.id} />
-          <span style={{
-            fontSize: 'var(--text-sm)',
-            color: 'var(--color-text-muted)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-            userSelect: 'none',
-          }}>
-            <span style={{
+          <button
+            onClick={e => { e.stopPropagation(); onToggle(e); }}
+            aria-expanded={isExpanded}
+            aria-controls={signal.id + '-body'}
+            style={{
+              fontSize: 'var(--text-sm)',
+              color: 'var(--color-text-muted)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+              userSelect: 'none',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '2px 4px',
+              fontFamily: "'Inter', sans-serif",
+            }}
+          >
+            <span aria-hidden="true" style={{
               display: 'inline-block',
               transform: isExpanded ? 'rotate(180deg)' : 'none',
               transition: 'transform 220ms cubic-bezier(0.16, 1, 0.3, 1)',
               lineHeight: 1,
             }}>↓</span>
             <span>{isExpanded ? 'Collapse' : 'Expand'}</span>
-          </span>
+          </button>
         </div>
       </div>
 
       {/* ── Expanded content ── */}
       <div
+        id={signal.id + '-body'}
         style={{
           maxHeight: isExpanded ? '4000px' : '0',
           opacity: isExpanded ? 1 : 0,
@@ -383,6 +394,16 @@ function SignalCard({ signal, isExpanded, onToggle }) {
         <div style={{ padding: '0 24px 24px' }}>
           {/* Divider */}
           <div style={{ height: '1px', backgroundColor: 'var(--color-divider)', marginBottom: '20px' }} />
+
+          {/* Confidence rubric — visible on touch, not just hover */}
+          <p style={{
+            fontSize: 'var(--text-xs)',
+            color: 'var(--color-text-muted)',
+            marginBottom: '20px',
+            fontVariantNumeric: 'tabular-nums',
+          }}>
+            {CONFIDENCE_TIPS[signal.confidence]}
+          </p>
 
           {/* Thesis */}
           <div style={{ marginBottom: '20px' }}>
@@ -463,14 +484,14 @@ function SignalCard({ signal, isExpanded, onToggle }) {
                 alignItems: 'start',
               }}>
                 <div>
-                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-faint)', marginBottom: '4px', letterSpacing: '0.03em' }}>Original thesis</div>
+                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)', marginBottom: '4px', letterSpacing: '0.03em' }}>Original thesis</div>
                   <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)', lineHeight: 1.55, textWrap: 'pretty' }}>
                     {signal.outcome.original_thesis}
                   </p>
                 </div>
                 <div style={{ color: 'var(--color-text-faint)', fontSize: 'var(--text-sm)', paddingTop: '22px' }}>→</div>
                 <div>
-                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-faint)', marginBottom: '4px', letterSpacing: '0.03em' }}>What happened</div>
+                  <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)', marginBottom: '4px', letterSpacing: '0.03em' }}>What happened</div>
                   <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text)', lineHeight: 1.55, textWrap: 'pretty' }}>
                     {signal.outcome.what_happened}
                   </p>
@@ -512,7 +533,7 @@ function SignalCard({ signal, isExpanded, onToggle }) {
                     </span>
                     <span style={{
                       fontSize: 'var(--text-xs)',
-                      color: 'var(--color-text-faint)',
+                      color: 'var(--color-text-muted)',
                       fontVariantNumeric: 'tabular-nums',
                       whiteSpace: 'nowrap',
                       paddingTop: '1px',
@@ -538,7 +559,7 @@ function SignalCard({ signal, isExpanded, onToggle }) {
           }}>
             <span style={{
               fontSize: 'var(--text-xs)',
-              color: 'var(--color-text-faint)',
+              color: 'var(--color-text-muted)',
               fontVariantNumeric: 'tabular-nums',
               letterSpacing: '0.02em',
             }}>
@@ -546,7 +567,7 @@ function SignalCard({ signal, isExpanded, onToggle }) {
             </span>
             <span style={{
               fontSize: 'var(--text-xs)',
-              color: 'var(--color-text-faint)',
+              color: 'var(--color-text-muted)',
               fontVariantNumeric: 'tabular-nums',
             }}>
               Last updated {fmt(signal.date_updated)}

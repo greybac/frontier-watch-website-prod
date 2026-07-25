@@ -9,6 +9,39 @@ function formatDate(dateStr) {
 
 // ─── Icons ─────────────────────────────────────────────────────────────────
 
+// Brand mark — the ping. Full six-arc mark for the header (28px+),
+// simplified one-ring variant for small sizes (footer, ≤20px).
+function PingMark({ size = 19, variant = 'simple' }) {
+  const common = {
+    width: size, height: size, viewBox: '0 0 64 64', fill: 'none',
+    'aria-hidden': true, style: { color: 'var(--color-primary)', flexShrink: 0 },
+  };
+  if (variant === 'full') {
+    return (
+      <svg {...common}>
+        <g stroke="currentColor" strokeWidth="4" strokeLinecap="round">
+          <path d="M27.35 41.97 A11 11 0 0 1 27.35 22.03" />
+          <path d="M23 47.59 A18 18 0 0 1 23 16.41" />
+          <path d="M17.66 52.48 A25 25 0 0 1 17.66 11.52" />
+          <path d="M39.78 24.22 A11 11 0 0 1 39.78 39.78" />
+          <path d="M43.57 18.21 A18 18 0 0 1 43.57 45.79" />
+          <path d="M51.15 15.93 A25 25 0 0 1 51.15 48.07" />
+        </g>
+        <circle cx="32" cy="32" r="4.5" fill="currentColor" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...common}>
+      <g stroke="currentColor" strokeWidth="7" strokeLinecap="round">
+        <path d="M23.9 47.6 A17.5 17.5 0 0 1 23.9 16.4" />
+        <path d="M42.5 18.7 A17.5 17.5 0 0 1 42.5 45.3" />
+      </g>
+      <circle cx="32" cy="32" r="8" fill="currentColor" />
+    </svg>
+  );
+}
+
 function MoonIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -61,17 +94,19 @@ function Header({ theme, onThemeToggle, lastUpdated }) {
         gap: '0',
       }} className="header-inner">
         {/* Wordmark — matches home page */}
-        <a href="../index.html" style={{ display: 'flex', alignItems: 'baseline', gap: '5px', textDecoration: 'none' }}>
+        <a href="../index.html" style={{ display: 'flex', alignItems: 'center', gap: '5px', textDecoration: 'none' }}>
+          <PingMark size={28} variant="full" />
           <span style={{
             fontFamily: "'Inter', sans-serif",
             fontWeight: 600,
-            fontSize: '17px',
+            fontSize: '19px',
             color: 'var(--color-text)',
+            marginLeft: '2px',
           }}>Frontier</span>
           <span style={{
             fontFamily: "'Instrument Serif', serif",
-            fontStyle: 'italic',
-            fontSize: '19px',
+            fontStyle: 'normal',
+            fontSize: '21px',
             color: 'var(--color-text)',
           }}>Watch</span>
         </a>
@@ -91,7 +126,7 @@ function Header({ theme, onThemeToggle, lastUpdated }) {
         {/* Last updated */}
         <span className="hide-mobile" style={{
           fontSize: 'var(--text-xs)',
-          color: 'var(--color-text-faint)',
+          color: 'var(--color-text-muted)',
           fontVariantNumeric: 'tabular-nums',
           marginRight: '16px',
           letterSpacing: '0.01em',
@@ -147,9 +182,10 @@ const DOMAIN_ABBREV = {
 function TrustAnchorStrip({ signals, lastUpdated }) {
   const stats = useMemo(() => {
     const activeCount = signals.filter(s => s.status === 'active' || s.status === 'developing').length;
+    const closedCount = signals.filter(s => s.status === 'resolved' || s.status === 'invalidated').length;
     const domains = [...new Set(signals.map(s => s.domain))];
     const domainsShort = domains.map(d => DOMAIN_ABBREV[d] || d);
-    return { activeCount, totalCount: signals.length, domains, domainsShort };
+    return { activeCount, closedCount, totalCount: signals.length, domains, domainsShort };
   }, [signals]);
 
   return (
@@ -164,65 +200,59 @@ function TrustAnchorStrip({ signals, lastUpdated }) {
         padding: '24px 48px',
         display: 'flex',
         alignItems: 'flex-start',
+        flexWrap: 'wrap',
+        rowGap: '16px',
         gap: '0',
       }} className="trust-strip-inner">
-        {/* Stats group — flex:1 so it fills space, leaving room for editorial */}
-        <div className="trust-stats-group" style={{ flex: 1, display: 'flex', alignItems: 'flex-start', gap: '0', minWidth: 0 }}>
+        {/* Stats group — fills available space; wraps instead of overflowing */}
+        <div className="trust-stats-group" style={{ flex: '1 1 auto', display: 'flex', alignItems: 'flex-start', flexWrap: 'wrap', rowGap: '16px', gap: '0', minWidth: 0 }}>
           {/* Stat 1 */}
-          <div className="trust-stat" style={{ flex: '0 0 auto', paddingRight: '32px' }}>
+          <div className="trust-stat" style={{ flex: '0 1 auto', minWidth: 0, paddingRight: '20px' }}>
             <div style={{ fontSize: '22px', fontWeight: 600, color: 'var(--color-text)', lineHeight: 1.2, fontVariantNumeric: 'tabular-nums' }}>
               {stats.activeCount} Active Signal{stats.activeCount !== 1 ? 's' : ''}
             </div>
             <div style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)', marginTop: '3px' }}>
-              Tracking Frontier Tech
+              Tracking frontier tech
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-faint)', marginTop: '2px' }}>
-              developments since April 2026
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)', marginTop: '2px' }}>
+              {stats.totalCount} signals since April 2026
             </div>
           </div>
 
-          <div style={{ width: '1px', backgroundColor: 'var(--color-divider)', alignSelf: 'stretch', margin: '0 32px' }} className="trust-divider" />
+          <div style={{ width: '1px', backgroundColor: 'var(--color-divider)', alignSelf: 'stretch', margin: '0 20px' }} className="trust-divider" />
 
           {/* Stat 2 */}
-          <div className="trust-stat" style={{ flex: '0 0 auto', paddingRight: '32px' }}>
+          <div className="trust-stat" style={{ flex: '0 1 auto', minWidth: 0, paddingRight: '20px' }}>
             <div style={{ fontSize: '22px', fontWeight: 600, color: 'var(--color-text)', lineHeight: 1.2, fontVariantNumeric: 'tabular-nums' }}>
               {stats.domains.length} Domain{stats.domains.length !== 1 ? 's' : ''} Covered
             </div>
             <div style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)', marginTop: '3px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
               {stats.domainsShort.join(' · ')}
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-faint)', marginTop: '2px' }}>
-              {stats.totalCount} signals total
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)', marginTop: '2px' }}>
+              Confidence-scored, source-cited
             </div>
           </div>
 
-          <div style={{ width: '1px', backgroundColor: 'var(--color-divider)', alignSelf: 'stretch', margin: '0 32px' }} className="trust-divider" />
+          <div style={{ width: '1px', backgroundColor: 'var(--color-divider)', alignSelf: 'stretch', margin: '0 20px' }} className="trust-divider" />
 
-          {/* Stat 3 */}
-          <div className="trust-stat" style={{ flex: '0 0 auto' }}>
-            <div style={{ fontSize: '22px', fontWeight: 600, color: 'var(--color-text)', lineHeight: 1.2 }}>
-              Updated Weekly
+          {/* Stat 3 — the proof stat */}
+          <div className="trust-stat" style={{ flex: '0 1 auto', minWidth: 0 }}>
+            <div style={{ fontSize: '22px', fontWeight: 600, color: 'var(--color-text)', lineHeight: 1.2, fontVariantNumeric: 'tabular-nums' }}>
+              {stats.closedCount} Outcome{stats.closedCount !== 1 ? 's' : ''} Recorded
             </div>
             <div style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)', marginTop: '3px' }}>
-              {lastUpdated ? `Last update: ${formatDate(lastUpdated)}` : 'Last update: —'}
+              Wrong calls stay public too
             </div>
-            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-faint)', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '5px' }}>
-              Track record: Live
-              <span className="live-dot" />
+            <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)', marginTop: '2px' }}>
+              {lastUpdated ? `Last update: ${formatDate(lastUpdated)}` : 'Last update: —'}
             </div>
           </div>
         </div>
 
-        {/* Editorial context — fixed width, never shrinks */}
-        <div className="trust-editorial" style={{
-          flex: '0 0 220px',
-          fontSize: 'var(--text-sm)',
-          color: 'var(--color-text-muted)',
-          lineHeight: 1.65,
-          textAlign: 'right',
-          paddingLeft: '32px',
-          borderLeft: '1px solid var(--color-divider)',
-        }}>
+        {/* Editorial context — visual styling lives in the page stylesheet so
+            media queries can restyle it when it wraps below the stats */}
+        <div className="trust-editorial" style={{ flex: '0 1 240px', minWidth: '200px' }}>
           A signal is a specific, forward-looking observation with a material strategic implication for technology strategy professionals. Confidence-scored. Source-cited. Outcomes tracked publicly.
         </div>
       </div>
@@ -251,12 +281,13 @@ function Footer() {
       }} className="footer-inner">
         {/* Left: logo + disclaimer */}
         <div>
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginBottom: '6px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginBottom: '6px' }}>
+            <PingMark size={16} />
             <span style={{ fontFamily: "'Inter', sans-serif", fontWeight: 600, fontSize: '15px', color: 'var(--color-text)' }}>Frontier</span>
-            <span style={{ fontFamily: "'Instrument Serif', serif", fontStyle: 'italic', fontSize: '17px', color: 'var(--color-text)' }}>Watch</span>
+            <span style={{ fontFamily: "'Instrument Serif', serif", fontStyle: 'normal', fontSize: '17px', color: 'var(--color-text)' }}>Watch</span>
           </div>
-          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-faint)', lineHeight: 1.6 }}>
-            Frontier Watch is Technology intelligence for strategy professionals.<br />Not investment advice.
+          <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)', lineHeight: 1.6 }}>
+            &copy; 2026 Frontier Watch — technology intelligence for strategy professionals.<br />Nothing published here constitutes investment, financial, legal, or professional advice.
           </div>
         </div>
 
