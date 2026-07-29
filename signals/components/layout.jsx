@@ -242,7 +242,7 @@ function TrustAnchorStrip({ signals, lastUpdated }) {
               {stats.closedCount} Outcome{stats.closedCount !== 1 ? 's' : ''} Recorded
             </div>
             <div style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)', marginTop: '3px' }}>
-              Wrong calls stay public too
+              Invalidated calls stay public too
             </div>
             <div style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)', marginTop: '2px' }}>
               {lastUpdated ? `Last update: ${formatDate(lastUpdated)}` : 'Last update: —'}
@@ -292,10 +292,11 @@ function Footer() {
         </div>
 
         {/* Right: nav links */}
-        <div style={{ display: 'flex', gap: '24px', alignItems: 'center', paddingTop: '2px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px 24px', alignItems: 'center', paddingTop: '2px' }}>
           {[
             { label: 'Newsletter', href: 'https://frontierwatch.substack.com' },
             { label: 'LinkedIn', href: 'https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7248378826097901568' },
+            { label: 'X', href: 'https://x.com/frontierwatchio' },
             { label: 'About', href: 'https://frontierwatch.substack.com/about' },
           ].map(link => (
             <a
